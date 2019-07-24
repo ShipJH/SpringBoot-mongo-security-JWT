@@ -65,14 +65,18 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
+    //JWT토큰을 분석하는 메서드
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
+        
+        //Bearer 로 시작하거나 토큰값이 없지 않은경우 (정상인경우) 베리어 자르고 나머지를 넘긴다.
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
     }
 
+    //JWT 토큰의 유효성을 검사하는 메소드
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);

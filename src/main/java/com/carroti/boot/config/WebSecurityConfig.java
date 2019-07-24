@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
+    //시큐리티 상속 재정의 Authentication Manager Builder구성
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         UserDetailsService userDetailsService = mongoUserDetails();
