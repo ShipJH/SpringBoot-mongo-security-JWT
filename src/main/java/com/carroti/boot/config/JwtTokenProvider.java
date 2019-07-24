@@ -40,6 +40,7 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
+    //JWT 토큰생성
     public String createToken(String username, Set<Role> set) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("roles", set);
@@ -53,11 +54,13 @@ public class JwtTokenProvider {
             .compact();
     }
 
+    //사용자 이름으로 사용자를로드
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    //JWT토큰을 사용하여 사용자 이름을 가져오는 메소드
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
