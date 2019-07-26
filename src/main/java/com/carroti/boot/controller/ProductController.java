@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.carroti.boot.models.Product;
 import com.carroti.boot.repositories.ProductRepository;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class ProductController {
 
+    private ProductRepository productRepository;
+
     @Autowired
-    ProductRepository productRepository;
+    public ProductController(ProductRepository productRepository) {
+    	this.productRepository = productRepository;
+    }
+    
 
     @RequestMapping(method=RequestMethod.GET, value="/api/products")
     public Iterable<Product> product() {
@@ -28,7 +33,6 @@ public class ProductController {
     @RequestMapping(method=RequestMethod.POST, value="/api/products")
     public String save(@RequestBody Product product) {
         productRepository.save(product);
-
         return product.getId();
     }
 

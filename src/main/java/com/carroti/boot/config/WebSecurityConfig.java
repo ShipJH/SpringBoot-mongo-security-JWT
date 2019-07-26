@@ -78,4 +78,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService mongoUserDetails() {
         return new CustomUserDetailsService();
     }
+    
+    
 }

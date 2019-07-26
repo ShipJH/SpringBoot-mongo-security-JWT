@@ -22,7 +22,7 @@ import com.carroti.boot.models.User;
 import com.carroti.boot.repositories.UserRepository;
 import com.carroti.boot.service.CustomUserDetailsService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
