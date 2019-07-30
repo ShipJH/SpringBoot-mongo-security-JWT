@@ -1,0 +1,31 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: springboot-gradle-mongo-security
+  data:
+    mongodb:
+      database: testdb
+      host: 192.168.0.92
+      port: 27017
+  main:
+    allow-bean-definition-overriding: true
+
+      
+zuul:
+  sensitive-headers:
+  host:
+    connect-timeout-millis: 600000
+    socket-timeout-millis: 600000
+  routes:
+    a-api:
+      path: /api/products/**
+      url: http://localhost:8081
+      stripPrefix: false
+    b-api:
+      path: /bars/**
+      url: http://localhost:8082
+      stripPrefix: false
+  ribbon:
+    eager-load:
+      enabled: false

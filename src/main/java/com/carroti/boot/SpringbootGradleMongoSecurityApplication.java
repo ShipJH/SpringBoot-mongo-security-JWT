@@ -3,11 +3,16 @@ package com.carroti.boot;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.Bean;
 
 import com.carroti.boot.models.Role;
 import com.carroti.boot.repositories.RoleRepository;
 
+
+@EnableZuulProxy
+@EnableZuulServer
 @SpringBootApplication
 public class SpringbootGradleMongoSecurityApplication {
 
