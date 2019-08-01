@@ -29,3 +29,7 @@ zuul:
   ribbon:
     eager-load:
       enabled: false
+      
+jwt:
+  validityInMilliseconds: 60000
+  secretKey: secret
