@@ -19,11 +19,11 @@ zuul:
     socket-timeout-millis: 600000
   routes:
     a-api:
-      path: /api/products/**
+      path: /api/sam/**
       url: http://localhost:8081
       stripPrefix: false
     b-api:
-      path: /bars/**
+      path: /api/demo/**
       url: http://localhost:8082
       stripPrefix: false
   ribbon:
