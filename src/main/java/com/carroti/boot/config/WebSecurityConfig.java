@@ -40,19 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/auth/register").permitAll()
                 .antMatchers("/api/sam/**").permitAll()
                 .antMatchers("/api/demo/**").hasAuthority("ADMIN")
-//                .antMatchers("/api/products/**").permitAll()
-//                .antMatchers("/api/products/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated().and().csrf()
                 .disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedEntryPoint())
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
-    http.cors();
+        http.cors();
     }
 
     @Override

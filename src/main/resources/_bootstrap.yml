@@ -1,0 +1,21 @@
+spring:
+ profiles:
+   active: dev
+ application:
+   name: Mongo-Security-Zuul
+   version: 1.0.0
+ main:
+    allow-bean-definition-overriding: true  
+
+management:
+ endpoints:
+   web:
+     base-path: /actuator
+     exposure:
+       include: ['refresh'] # actuator의 refresh를 사용할 수 있게 해줍니다.
+---
+spring:
+ profiles: dev
+ cloud:
+   config:
+     uri: http://192.168.0.45:8888 # config server의 uri를 설정해줘야합니다
