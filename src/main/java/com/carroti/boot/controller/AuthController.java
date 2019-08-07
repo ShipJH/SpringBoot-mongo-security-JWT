@@ -26,7 +26,7 @@ import com.carroti.boot.repositories.UserRepository;
 import com.carroti.boot.service.CustomUserDetailsService;
 
 //@CrossOrigin(origins = "http://localhost:4200")
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/api/auth")
 @RefreshScope
@@ -51,6 +51,9 @@ public class AuthController {
     @SuppressWarnings("rawtypes")
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthBody data) {
+    	
+    	System.out.println("zuul+auth로 로그인 요청");
+    	
         try {
             String username = data.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
@@ -60,6 +63,7 @@ public class AuthController {
             model.put("token", token);
             return ok(model);
         } catch (AuthenticationException e) {
+        	System.out.println("Invalid email/password supplied");
             throw new BadCredentialsException("Invalid email/password supplied");
         }
     }

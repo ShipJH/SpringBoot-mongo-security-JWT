@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,20 +23,16 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-//@PropertySource(value = {"classpath:/application.yml"})
 @Component
 public class JwtTokenProvider {
 	
-//    @Value("${jwt.secretKey}")
 	@Value("${jwt.secretKey}")
-    private String secretKey;// = "secret";// = environment.getRequiredProperty("jwt.secretKey"); //"secret";
+    private String secretKey;
 
-//    @Value("${security.jwt.token.expire-length:3600000}")
-//    @Value("${security.jwt.token.expire-length:60000}")
     
     @Value("${jwt.validityInMilliseconds}")
-    private long validityInMilliseconds; // = 60000;
-//    private long validityInMilliseconds = Long.parseLong(environment.getRequiredProperty("jwt.validityInMilliseconds")); //60000;//1m //3600000; // 1h
+    private long validityInMilliseconds; 
+
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -54,7 +48,6 @@ public class JwtTokenProvider {
         claims.put("roles", set);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
-//        Date validity = new Date(now.getTime() + validityInMilliseconds);
         return Jwts.builder()//
             .setClaims(claims)//
             .setIssuedAt(now)//

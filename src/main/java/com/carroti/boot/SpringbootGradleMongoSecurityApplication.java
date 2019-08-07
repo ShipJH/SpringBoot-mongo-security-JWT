@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.netflix.zuul.EnableZuulServer;
 import org.springframework.context.annotation.Bean;
 
+import com.carroti.boot.config.PreFilter;
 import com.carroti.boot.models.Role;
 import com.carroti.boot.repositories.RoleRepository;
 
@@ -33,6 +34,8 @@ public class SpringbootGradleMongoSecurityApplication {
 	    };
 	}
 	
-	
-	
+    @Bean
+    public PreFilter preFilter() {
+        return new PreFilter();
+    }
 }

@@ -23,6 +23,9 @@ public class JwtTokenFilter extends GenericFilterBean {
 	@Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
         throws IOException, ServletException {
+		
+		System.out.println("security Filter");
+		
 		//접두어가 Bearer 인 Authorization 요청 헤더에서 JWT 토큰을 분석
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
         
